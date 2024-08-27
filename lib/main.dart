@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InternetConnectionCubit()..checInternetConnectivity(),
+      create: (context) =>
+          InternetConnectionCubit()..checInternetConnectivity(),
       child: const MaterialApp(
         title: 'Flutter Demo',
         home: MyHomePage(),
@@ -39,7 +40,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BlocBuilder<InternetConnectionCubit, InternetConnectionState>(
+            BlocConsumer<InternetConnectionCubit, InternetConnectionState>(
+              listener: (context, state) {
+                if (state is ConnectedState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Internet is connected"),
+                    ),
+                  );
+                }
+                else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Internet is connected"),
+                    ),
+                  );
+                }
+              },
               builder: (context, state) {
                 if (state is ConnectedState) {
                   return Text(

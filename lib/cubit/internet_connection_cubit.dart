@@ -12,7 +12,7 @@ class InternetConnectionCubit extends Cubit<InternetConnectionState> {
   late StreamSubscription<List<ConnectivityResult>> _subscription;
 
   void connected() => emit(ConnectedState(message: "Internet's Connected"));
-  void disconnected() => emit(ConnectedState(message: "Internet's Connected"));
+  void disconnected() => emit(DisconnectedState(message: "Internet's Disconnected"));
 
   void checInternetConnectivity() {
     _subscription = Connectivity().onConnectivityChanged.listen(
