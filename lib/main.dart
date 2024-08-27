@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          InternetConnectionCubit()..checInternetConnectivity(),
+          InternetConnectionCubit()..checkInternetConnectivity(),
       child: const MaterialApp(
         title: 'Flutter Demo',
         home: MyHomePage(),
