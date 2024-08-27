@@ -1,4 +1,4 @@
-import 'package:bloc_task3/bloc/internet_connection_bloc.dart';
+import 'package:bloc_task3/cubit/internet_connection_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InternetConnectionBloc(),
+      create: (context) => InternetConnectionCubit()..checInternetConnectivity(),
       child: const MaterialApp(
         title: 'Flutter Demo',
-        home: const MyHomePage(),
+        home: MyHomePage(),
       ),
     );
   }
@@ -39,16 +39,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BlocBuilder<InternetConnectionBloc, InternetConnectionState>(
+            BlocBuilder<InternetConnectionCubit, InternetConnectionState>(
               builder: (context, state) {
                 if (state is ConnectedState) {
                   return Text(
-                    state.message.toString(),
+                    state.message,
                     style: const TextStyle(color: Colors.black, fontSize: 25),
                   );
                 } else if (state is DisconnectedState) {
-                  print(state.message);
-
                   return Text(
                     state.message.toString(),
                     style: const TextStyle(color: Colors.black, fontSize: 25),
